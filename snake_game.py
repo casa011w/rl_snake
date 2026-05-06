@@ -305,7 +305,7 @@ class SnakeGame:
         self.close()
         print(f"Game ended. Final score: {self.score}")
 
-def main():
+#def main():
     """Play Snake manually"""
     import argparse
 
@@ -325,39 +325,38 @@ def main():
         game.close()
         print("\nGame interrupted")
 
+# Hapus atau kosongkan fungsi main() lama
+# Lalu pastikan bagian paling bawah HANYA SEPERTI INI:
+
 if __name__ == "__main__":
-    # 1. PAKSA sistem video buat bangun!
     import pygame
     pygame.init()
     
-    # 2. Siapin gamenya
+    # Inisialisasi game
     game = SnakeGame(width=20, height=15)
     game.reset()
-    
-    # 3. Panggil render PERTAMA KALI buat bikin jendela
     game.render() 
     
     running = True
-    print("Sistem Aktif! Mode Robot Pusing Siap! Gugu Gaga!")
+    print("OPERASI CABUT OTAK BERHASIL! Sekarang ular kaku! Gugu Gaga!")
 
     while running:
-        # Cek tombol close agar tidak eror lagi
+        # Cek tombol close biar nggak hang
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
 
-        # GERAK KE KANAN (Action 1)
-        # Ingat: action 1 di kodemu itu belok kanan dari posisi sekarang
+        # PAKSA ACTION 1 (Belok Kanan)
+        # Jangan panggil play_manual()! Panggil take_action langsung di sini.
         observation, reward, terminated, truncated, info = game.take_action(action=1)
         
-        # Gambar ularnya
         game.render()
         
         if terminated:
             print(f"Yah nabrak! Skor: {info['score']}")
             game.reset()
-            game.render() # Pastikan gambar muncul lagi setelah mati
+            game.render()
             
-        game.clock.tick(10) # Kecepatan biar mata kita bisa ngikutin
+        game.clock.tick(10) # Lambat saja biar kelihatan kakunya
 
     game.close()
