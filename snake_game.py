@@ -305,25 +305,6 @@ class SnakeGame:
         self.close()
         print(f"Game ended. Final score: {self.score}")
 
-#def main():
-    """Play Snake manually"""
-    import argparse
-
-    parser = argparse.ArgumentParser(description="Play Snake manually")
-    parser.add_argument("--width", type=int, default=20, help="Game width")
-    parser.add_argument("--height", type=int, default=15, help="Game height")
-    parser.add_argument("--speed", type=int, default=8, help="Game speed (1-20)")
-
-    args = parser.parse_args()
-    args.speed = max(1, min(20, args.speed))
-
-    game = SnakeGame(args.width, args.height)
-
-    try:
-        game.play_manual(fps=args.speed)
-    except KeyboardInterrupt:
-        game.close()
-        print("\nGame interrupted")
 
 # Hapus atau kosongkan fungsi main() lama
 # Lalu pastikan bagian paling bawah HANYA SEPERTI INI:
