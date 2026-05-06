@@ -326,4 +326,21 @@ def main():
         print("\nGame interrupted")
 
 if __name__ == "__main__":
-    main()
+    game = SnakeGame(width=20, height=15)
+    game.reset()
+    
+    running = True
+    while running:
+        # Kita paksa si ular ambil action 1 (Gerak ke Kanan)
+        # Menurut kode kamu: action 1 = Turn Right / Bergerak ke Kanan
+        observation, reward, terminated, truncated, info = game.take_action(action=1)
+        
+        # Gambar ularnya di layar
+        game.render()
+        
+        # Kalau nabrak, kita reset lagi biar dia jalan ke kanan lagi
+        if terminated:
+            print(f"Yah nabrak! Skor akhirnya: {info['score']}")
+            game.reset()
+            
+    game.close()
