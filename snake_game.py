@@ -326,33 +326,38 @@ def main():
         print("\nGame interrupted")
 
 if __name__ == "__main__":
+    # 1. PAKSA sistem video buat bangun!
+    import pygame
+    pygame.init()
+    
+    # 2. Siapin gamenya
     game = SnakeGame(width=20, height=15)
     game.reset()
     
-    # 1. Buka jendela gamenya dulu! (SANGAT PENTING)
+    # 3. Panggil render PERTAMA KALI buat bikin jendela
     game.render() 
     
     running = True
-    print("Mode Robot Pusing (Muter Kanan Terus) Aktif! Gugu Gaga!")
+    print("Sistem Aktif! Mode Robot Pusing Siap! Gugu Gaga!")
 
     while running:
-        # 2. Sekarang baru bisa cek event (close window)
+        # Cek tombol close agar tidak eror lagi
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
 
-        # 3. Gerak ke kanan (action 1)
+        # GERAK KE KANAN (Action 1)
+        # Ingat: action 1 di kodemu itu belok kanan dari posisi sekarang
         observation, reward, terminated, truncated, info = game.take_action(action=1)
         
-        # 4. Gambar ulang posisi barunya
+        # Gambar ularnya
         game.render()
         
         if terminated:
-            print(f"Aduch nabrak! Skor: {info['score']}")
+            print(f"Yah nabrak! Skor: {info['score']}")
             game.reset()
-            # Panggil render lagi setelah reset biar jendelanya tetap ada
-            game.render()
+            game.render() # Pastikan gambar muncul lagi setelah mati
             
-        game.clock.tick(10) 
+        game.clock.tick(10) # Kecepatan biar mata kita bisa ngikutin
 
     game.close()
