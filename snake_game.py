@@ -106,7 +106,7 @@ class SnakeGame:
 
     def _update_direction(self, action):
         """Update direction based on action"""
-        if action == 1:  # Continue straight
+        if action == 0:  # Continue straight
             return
 
         directions = [Direction.UP, Direction.RIGHT, Direction.DOWN, Direction.LEFT]
