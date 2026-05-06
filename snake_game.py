@@ -326,21 +326,32 @@ def main():
         print("\nGame interrupted")
 
 if __name__ == "__main__":
+    # 1. Siapin lapangannya
     game = SnakeGame(width=20, height=15)
     game.reset()
     
     running = True
+    print("Mode Robot Pusing (Muter Kanan Terus) Aktif! Gugu Gaga!")
+
     while running:
-        # Kita paksa si ular ambil action 1 (Gerak ke Kanan)
-        # Menurut kode kamu: action 1 = Turn Right / Bergerak ke Kanan
+        # 2. WAJIB: Biar jendelanya nggak macet dan bisa di-close
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
+        # 3. PAKSA si ular belok kanan terus (Action 1)
+        # Ingat: Action 1 di kode kamu itu 'Turn Right' dari arah sebelumnya
         observation, reward, terminated, truncated, info = game.take_action(action=1)
         
-        # Gambar ularnya di layar
+        # 4. Gambar ularnya di layar biar kelihatan
         game.render()
         
-        # Kalau nabrak, kita reset lagi biar dia jalan ke kanan lagi
+        # 5. Kalau nabrak, kita bersihin ingatannya (reset)
         if terminated:
-            print(f"Yah nabrak! Skor akhirnya: {info['score']}")
+            print(f"Aduch nabrak! Skor: {info['score']}. Ulang lagi ya!")
             game.reset()
             
+        # 6. Kasih jeda sedikit biar matanya nggak pusing lihatnya
+        game.clock.tick(10) 
+
     game.close()
